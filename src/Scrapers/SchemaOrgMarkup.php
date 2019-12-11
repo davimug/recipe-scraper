@@ -32,6 +32,8 @@ class SchemaOrgMarkup implements ScraperInterface
         'totalTime',
         'url',
         'yield',
+        'ratingCount',
+        'ratingValue'
     ];
 
     /**
@@ -113,6 +115,32 @@ class SchemaOrgMarkup implements ScraperInterface
         return $this->extractString(
             $crawler,
             '[itemtype*="schema.org/Recipe"] [itemprop="cookingMethod"]'
+        );
+    }
+
+
+    /**
+     * @param  Crawler $crawler
+     * @return integer|null
+     */
+    protected function extractRatingCount(Crawler $crawler)
+    {
+        return $this->extractString(
+            $crawler,
+            '[itemtype*="schema.org/Recipe"] [itemprop="ratingCount"]'
+        );
+    }
+
+
+    /**
+     * @param  Crawler $crawler
+     * @return integer|bool|null
+     */
+    protected function extractRatingValue(Crawler $crawler)
+    {
+        return $this->extractString(
+            $crawler,
+            '[itemtype*="schema.org/Recipe"] [itemprop="ratingValue"]'
         );
     }
 
