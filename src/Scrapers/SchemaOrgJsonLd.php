@@ -29,6 +29,8 @@ class SchemaOrgJsonLd implements ScraperInterface
         'totalTime',
         'url',
         'yield',
+        'ratingCount',
+        'ratingValue'
     ];
 
     /**
@@ -319,6 +321,8 @@ class SchemaOrgJsonLd implements ScraperInterface
         return null;
     }
 
+
+
     /**
      * @param  Crawler $crawler
      * @param  array   $json
@@ -343,6 +347,43 @@ class SchemaOrgJsonLd implements ScraperInterface
         if (is_string($yield = Arr::get($json, 'recipeYield'))) {
             return $yield;
         }
+
+        return null;
+    }
+
+
+    /**
+     * @param  Crawler $crawler
+     * @param  array   $json
+     * @return integer|null
+     */
+    protected function extractRatingCount(Crawler $crawler, array $json)
+    {
+        if (is_numeric($count = Arr::get($json, 'aggregateRating.ratingCount'))) {
+            return $count;
+        }
+
+
+        if (is_numeric($count = Arr::get($json, 'aggregateRating.reviewCount'))) {
+            return $count;
+        }
+
+
+        return null;
+    }
+
+
+    /**
+     * @param  Crawler $crawler
+     * @param  integer|bool   $json
+     * @return string|null
+     */
+    protected function extractRatingValue(Crawler $crawler, array $json)
+    {
+        if (is_numeric($count = Arr::get($json, 'aggregateRating.ratingValue'))) {
+            return $count;
+        }
+
 
         return null;
     }
