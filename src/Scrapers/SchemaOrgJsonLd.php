@@ -418,6 +418,11 @@ class SchemaOrgJsonLd implements ScraperInterface
                 return Arr::ofArrays($json) ? $json : [$json];
             }
         ));
+        
+        
+        if(isset($jsons[0]['@graph'])) {
+                $jsons = $jsons[0]['@graph'];
+        }
 
         // Remove any non-recipe elements.
         $recipes = array_filter(
