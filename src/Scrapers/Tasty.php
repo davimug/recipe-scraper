@@ -4,6 +4,7 @@ namespace RecipeScraper\Scrapers;
 
 use Symfony\Component\DomCrawler\Crawler;
 use RecipeScraper\ExtractsDataFromCrawler;
+use RecipeScraper\Arr;
 
 class Tasty extends SchemaOrgJsonLd
 {
